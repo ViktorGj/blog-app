@@ -1,1 +1,82 @@
-<p>edit-create-article works!</p>
+<div class="form-container">
+    <h3>{{action}}</h3>
+    <form [formGroup]="form" (submit)="submit(form)" *ngIf="form">
+
+        <div class="mb-5">
+            <label>Title</label>
+            <input [class.invalid]="form.get('title').invalid && 
+            (form.get('title').dirty || form.get('title').touched)" formControlName="title" class="form-control"
+                type="text" placeholder="Title" name="title">
+
+            <div *ngIf="form.get('title').invalid && 
+            form.get('title').errors && 
+        (form.get('title').dirty || form.get('title').touched)">
+                <small class="text-danger" *ngIf="form.get('title').hasError('required')">
+                    This field is required.
+                </small>
+                <small class="text-danger" *ngIf="form.get('title').hasError('minlength')">
+                    The minimum length for this field is {{form.get('title').errors.minlength.requiredLength}}
+                    characters.
+                </small>
+                <small class="text-danger" *ngIf="form.get('title').hasError('maxlength')">
+                    The maximum length for this field is {{form.get('title').errors.maxlength.requiredLength}}
+                    characters.
+                </small>
+            </div>
+        </div>
+
+
+        <div class="mb-5">
+            <label>Image URL</label>
+            <input [class.invalid]="form.get('picture').invalid && 
+            (form.get('picture').dirty || form.get('picture').touched)" formControlName="picture" class="form-control"
+                type="text" placeholder="Image URL" name="picture">
+
+            <div *ngIf="form.get('picture').invalid && 
+            form.get('picture').errors && 
+        (form.get('picture').dirty || form.get('picture').touched)">
+                <small class="text-danger" *ngIf="form.get('picture').hasError('required')">
+                    This field is required.
+                </small>
+                <small class="text-danger" *ngIf="form.get('picture').hasError('minlength')">
+                    The minimum length for this field is {{form.get('picture').errors.minlength.requiredLength}}
+                    characters.
+                </small>
+                <small class="text-danger" *ngIf="form.get('picture').hasError('maxlength')">
+                    The maximum length for this field is {{form.get('picture').errors.maxlength.requiredLength}}
+                    characters.
+                </small>
+            </div>
+        </div>
+
+        <div class="mb-5">
+            <label>Description</label>
+            <textarea [class.invalid]="form.get('description').invalid && 
+            (form.get('description').dirty || form.get('description').touched)" formControlName="description"
+                class="form-control" rows="3" name="description"></textarea>
+
+            <div *ngIf="form.get('description').invalid && 
+            form.get('description').errors && 
+        (form.get('description').dirty || form.get('description').touched)">
+                <small class="text-danger" *ngIf="form.get('description').hasError('required')">
+                    This field is required.
+                </small>
+                <small class="text-danger" *ngIf="form.get('description').hasError('minlength')">
+                    The minimum length for this field is {{form.get('description').errors.minlength.requiredLength}}
+                    characters.
+                </small>
+                <small class="text-danger" *ngIf="form.get('description').hasError('maxlength')">
+                    The maximum length for this field is {{form.get('description').errors.maxlength.requiredLength}}
+                    characters.
+                </small>
+            </div>
+        </div>
+
+
+        <div class="mt-4 form-btns">
+            <button type="button" class="btn btn-danger" (click)="navigateTo()">CANCEL</button>
+            <button [disabled]="!form.valid" type="submit" class="btn btn-primary ml-3">{{action | uppercase}}</button>
+        </div>
+    </form>
+
+</div>
