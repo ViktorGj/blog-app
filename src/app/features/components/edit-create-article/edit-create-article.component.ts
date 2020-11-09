@@ -1,8 +1,10 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ArticlesService } from 'src/app/core/services/articles.service';
 import { ActionTypeEnum } from 'src/app/models/action-type.enum';
+import { Article } from 'src/app/models/article.model';
 
 @Component({
   selector: 'blog-edit-create-article',
@@ -17,15 +19,16 @@ export class EditCreateArticleComponent implements OnInit {
     private articlesService: ArticlesService,
     private route: ActivatedRoute,
     private router: Router,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-   this.editCreate();
+    this.editCreate();
   }
-  
+
   editCreate() {
     const id = this.route.snapshot.paramMap.get('id');
-    if(id) {
+    if (id) {
       this.editArticle(id);
       this.action = ActionTypeEnum.Update
     } else {
@@ -57,17 +60,18 @@ export class EditCreateArticleComponent implements OnInit {
         description: [article.description ? article.description : null]
       });
     }
-    console.log(this.form)
   }
 
   submit() {
     const value = this.form.value;
-    console.log(value);
     this.saveOrUpdate(value, this.action);
   }
 
-  saveOrUpdate(article, actionType) {
+  saveOrUpdate(article: Article, actionType) {
     if (actionType === ActionTypeEnum.Save) {
+      let todaysDate = new Date().toDateString();
+      todaysDate = this.datePipe.transform(todaysDate, 'dd-MM-yyyy');
+      article = { ...article, dateCreated: todaysDate }
       this.articlesService.createArticle(article);
     } else {
       this.articlesService.editArticle(article.id, article);

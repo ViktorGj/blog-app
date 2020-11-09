@@ -51,7 +51,7 @@ export class ArticlesService {
     return articles.find(a => a.id == id)
   }
 
-  createArticle(article) {
+  createArticle(article: Article) {
     let articles = this.getAllArticles();
     article.id = '_' + Math.random().toString(36).substr(2, 9);
     articles.push(article);

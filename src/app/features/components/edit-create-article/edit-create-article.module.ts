@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { EditCreateArticleRoutingModule } from './edit-create-article-routing.module';
 import { EditCreateArticleComponent } from './edit-create-article.component';
@@ -12,7 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     EditCreateArticleRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-  ]
+    ReactiveFormsModule
+  ],
+  providers: [DatePipe],
 })
 export class EditCreateArticleModule { }

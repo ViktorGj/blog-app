@@ -8,8 +8,8 @@ import { ArticleDetailsComponent } from './article-details.component';
 @NgModule({
   declarations: [ArticleDetailsComponent],
   imports: [
-    CommonModule,
-    ArticleDetailsRoutingModule
+    ArticleDetailsRoutingModule,
+    CommonModule
   ]
 })
 export class ArticleDetailsModule { }

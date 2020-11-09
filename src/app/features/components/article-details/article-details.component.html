@@ -1,1 +1,38 @@
-<p>article-details works!</p>
+<div class="form-container" *ngIf="article">
+    <p class="card-text"><small class="text-muted date-article">Date Created:
+            {{article.dateCreated | date: 'dd MMM yyyy'}} </small></p>
+    <h3 class="mb-3">{{article.title}}</h3>
+    <div class="mb-3">
+        <img class="image-detail" src="{{article.picture}}" alt="">
+    </div>
+    <p>{{article.description}}</p>
+
+    <div class="mt-4">
+        <button class="btn btn-primary" [routerLink]="['/articles']">BACK</button>
+        <button class="btn btn-danger ml-3" data-toggle="modal" data-target="#exampleModal"
+            (click)="id = article.id">DELETE</button>
+        <button class="btn btn-primary float-right" [routerLink]="['/articles/create']">Create New</button>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Article</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this article ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="delete(id)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
