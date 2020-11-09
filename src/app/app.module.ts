@@ -7,19 +7,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth';
-import { HomePageComponent } from './features/components/home-page/home-page.component';
+import { ArticlesComponent } from './features/components/articles/articles.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    ArticlesComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-  ],
+    NgxPaginationModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

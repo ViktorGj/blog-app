@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { EditCreateArticleComponent } from './edit-create-article.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', component: EditCreateArticleComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
