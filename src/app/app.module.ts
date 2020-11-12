@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,9 @@ import { ArticlesComponent } from './features/components/articles/articles.compo
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpErrorInterceptor } from './core/interceptors/errorInterceptor';
+import { GlobalErrorHandler } from './core/services/error-handler.service';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,12 +28,19 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
-    ],
+    NgxPaginationModule,
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' })
+  ],
   providers: [
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     }
   ],

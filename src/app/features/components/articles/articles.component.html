@@ -5,39 +5,46 @@
     </button>
 </div>
 
-<div>
-    <div class="card mb-3" *ngFor="let article of articles | paginate: { itemsPerPage:5, currentPage: p }"
-        style="max-width: 540px;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img src="{{article.picture}}" class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <div class="d-flex justify-content-end">
-                        <i class="icon-eye-open view-icon" [routerLink]="['/articles', article.id]"></i>
+<ng-container *ngIf="articles$ | async as articles">
+    <div>
+        <div class="card mb-3" *ngFor="let article of articles | paginate: { itemsPerPage:3, currentPage: p }"
+            style="max-width: 540px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="{{article.picture}}" class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-end">
+                            <i class="icon-eye-open view-icon" [routerLink]="['/articles', article.id]"></i>
+                        </div>
+                        <h5 class="card-title">{{article.title}}</h5>
+                        <p class="card-text">{{article.description}}</p>
+                        <div class="action-controls mb-2">
+                            <button class="btn btn-danger btn-sm ml-3" (click)="navigateTo(article.id)">
+                                Update
+                                <span><i class="icon-edit"></i></span>
+                            </button>
+                            <button class="btn btn-danger btn-sm ml-3" data-toggle="modal" data-target="#exampleModal"
+                                (click)="id = article.id">
+                                Delete
+                                <i class="icon-trash"></i>
+                            </button>
+                        </div>
+                        <p class="card-text"><small class="text-muted date-article">Date Created:
+                                {{article.dateCreated | date: 'dd MMM yyyy'}} </small></p>
                     </div>
-                    <h5 class="card-title">{{article.title}}</h5>
-                    <p class="card-text">{{article.description}}</p>
-                    <div class="action-controls mb-2">
-                        <button class="btn btn-danger btn-sm ml-3" (click)="navigateTo(article.id)">
-                            Update
-                            <span><i class="icon-edit"></i></span>
-                        </button>
-                        <button class="btn btn-danger btn-sm ml-3" data-toggle="modal" data-target="#exampleModal"
-                            (click)="id = article.id">
-                            Delete
-                            <i class="icon-trash"></i>
-                        </button>
-                    </div>
-                    <p class="card-text"><small class="text-muted date-article">Date Created: {{article.dateCreated | date: 'dd MMM yyyy'}} </small></p>
                 </div>
             </div>
         </div>
-    </div>
 
-    <pagination-controls previousLabel="Prev" (pageChange)="p = $event"></pagination-controls>
-</div>
+        <ng-container *ngIf="articles.length">
+            <pagination-controls previousLabel="Prev" (pageChange)="p = $event"></pagination-controls>
+        </ng-container>
+        
+    </div>
+</ng-container>
+
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

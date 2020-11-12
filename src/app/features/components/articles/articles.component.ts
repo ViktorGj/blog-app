@@ -1,6 +1,6 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { ArticlesService } from 'src/app/core/services/articles.service';
 import { Article } from 'src/app/models/article.model';
 
@@ -10,7 +10,7 @@ import { Article } from 'src/app/models/article.model';
 })
 export class ArticlesComponent implements OnInit {
   p: number = 1;
-  articles: any[];
+  articles$: Observable<Article[]>;
   id: string;
 
   constructor(
@@ -18,13 +18,11 @@ export class ArticlesComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.articles = this.articlesService.getAllArticles();
+    this.articles$ = this.articlesService.getAllArticles();
   }
-
 
   delete(id) {
     this.articlesService.deleteArticle(id);
-    this.articles = this.articlesService.getAllArticles();
   }
 
   navigateTo(id) {

@@ -1,4 +1,4 @@
-<div class="form-container" *ngIf="article">
+<div class="form-container" *ngIf="article$ | async as article">
     <p class="card-text"><small class="text-muted date-article">Date Created:
             {{article.dateCreated | date: 'dd MMM yyyy'}} </small></p>
     <h3 class="mb-3">{{article.title}}</h3>
