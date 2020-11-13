@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticlesService } from 'src/app/core/services/articles.service';
 import { ActionTypeEnum } from 'src/app/models/action-type.enum';
 import { Article } from 'src/app/models/article.model';
