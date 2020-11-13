@@ -11,7 +11,7 @@ import { EditCreateArticleComponent } from './edit-create-article.component';
 import { ActionTypeEnum } from 'src/app/models/action-type.enum';
 
 
-describe('EditCreateArticleComponent', () => {
+fdescribe('EditCreateArticleComponent', () => {
   let component: EditCreateArticleComponent;
   let fixture: ComponentFixture<EditCreateArticleComponent>;
   let articleService: ArticlesService;
